@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     //Un commentaire
     console.log("Ça fonctionne!!!");
+
     var informations = [
         {
             id: "pizza",
@@ -31,5 +32,30 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     ]
 
+    var type = new URLSearchParams(window.location.search).get('type') || "pizza";
+    // console.log(window.location.search);
 
+    var infoPage = informations.find(x => x.id === type);
+
+    var title = document.querySelector('.main-title');
+    title.innerHTML = infoPage.title;
+
+    var slogan = document.querySelector('.sub-title');
+    slogan.innerHTML = infoPage.slogan;
+
+    var desc = document.querySelector('.sub-description');
+    desc.innerHTML = infoPage.description;
+
+    var image = document.querySelector('.sub-image img');
+    image.src = infoPage.image;
+
+    var list = document.querySelector('.type-list');
+    list.innerHTML = "";
+
+    for(var i = 0; i < infoPage.type.length; i++){
+        var li = document.createElement('li');
+        li.innerHTML = infoPage.type[i];
+
+        list.appendChild(li);
+    }
 });
